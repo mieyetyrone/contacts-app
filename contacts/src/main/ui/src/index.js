@@ -5,12 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import CreateContact from './components/CreateContact';
+import DisplayContacts from './components/DisplayContacts';
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/create" element={<CreateContact />} />
+      <Route path="/contacts" element={<DisplayContacts />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

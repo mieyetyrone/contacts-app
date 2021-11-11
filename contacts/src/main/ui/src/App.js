@@ -8,7 +8,7 @@ function App() {
     <div className="container pt-3">
       <h1>Contacts management</h1>
       <Button variant="outline-secondary" href="/create" style={{margin: "10px"}}>Add contact</Button>
-      <Button variant="outline-secondary" style={{margin: "10px"}}>View contacts</Button>
+      <Button variant="outline-secondary" href="/contacts" style={{margin: "10px"}}>View contacts</Button>
     </div>
     
   );
