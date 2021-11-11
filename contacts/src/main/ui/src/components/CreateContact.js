@@ -1,12 +1,63 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button';
+import { createContact } from '../services/ContactService'
 
 class CreateContact extends Component {
     
     state = {
-        contact: {}
+        contact: {
+            firstName: "",
+            lastName: "",
+            email: ""
+        }
     }
-    
+
+    createContact = (e) => {
+        if(this.validateInput()) {
+            createContact(this.state.contact)
+                .then(response => {
+                    console.log(response);
+            });
+            this.setState({contact: {}});
+        }
+    }
+
+    validateInput(){
+        let error = "";
+        let contact = this.state.contact
+        if(contact.firstName==="" || !this.validateText(contact.firstName)){
+            error += "The First name is not valid\n";
+        }
+        if(contact.lastName==="" || !this.validateText(contact.lastName)){
+            error += "The Last name is not valid\n";
+        }
+        if(contact.email==="" || !this.validateEmail(contact.email)){
+            error += "The Email is not valid\n";
+        }
+        if(error!==""){
+            alert(error);
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    validateText(txt){
+        let validText = /^[A-Za-z\s]+$/;
+        if(txt.match(validText)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
     onChangeForm = (e) => {
         let contact = this.state.contact
         if (e.target.name === 'firstname') {
@@ -18,11 +69,13 @@ class CreateContact extends Component {
         }
         this.setState({contact})
     }
+
+    
     
     render() {
         return (
             <div className="container pt-3">
-                <Button variant="outline-primary">Home</Button>
+                <Button variant="outline-primary" href="/">Home</Button>
                 <h1>Add contact below</h1>
                 <div>
                     <form>
@@ -50,7 +103,7 @@ class CreateContact extends Component {
                                 <br />
                             </div>
                         </div>
-                        <button type="button" className="btn btn-success">Create</button>
+                        <button type="submit" onClick= {(e) => this.createContact(e)} className="btn btn-success">Create</button>
                     </form>
                 </div>
             </div>
