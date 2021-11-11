@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Contact {
@@ -14,12 +16,16 @@ public class Contact {
     private long id;
 
     @Column
+    @NotBlank(message = "First name is required")
     private String firstName;
     
     @Column
+    @NotBlank(message = "Last name is required")
     private String lastName;
     
     @Column
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email is not valid")
     private String email;
 
 	public long getId() {

@@ -2,6 +2,8 @@ package com.mieyetyrone.contacts.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ public class ContactController {
     }
 	
 	@PostMapping(path = "/contacts")
-	public ResponseEntity<?> addContact(@RequestBody Contact contact) {
+	public ResponseEntity<?> addContact(@Valid @RequestBody Contact contact) {
         Contact resource = contactService.addContact(contact);
         return ResponseEntity.ok(resource);
     }
